@@ -12,7 +12,7 @@ module.exports.sendEmail = async function sendEmail(text, email) {
     });
 
     let info = await transport.sendMail({
-        from: '"vcx 👻" <testuz00707@gmail.comu>', // sender address
+        from: '"Verify token" <testuz00707@gmail.comu>', // sender address
         to: email, // list of receivers
         subject: "Please verificate your account", // Subject line
         text: text, // plain text body

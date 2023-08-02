@@ -6,7 +6,7 @@ const BookinModel = require('../models/bookingModel')
 const relations = require("./relations");
 
 const sequelize = new Sequelize(process.env.SQL_CONNECTION_STRING, {
-    // logging: false,
+    logging: false,
 });
 
 async function postgres() {

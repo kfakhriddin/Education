@@ -4,12 +4,6 @@ const scheduleLecture = async (req, res) => {
     try {
         const { title, startTime, endTime, userId } = req.body;
         const user = await req.db.users.findByPk(userId);
-        console.log(user,"eee")
-        // if (user.user_is_verified !== false) {
-            // return res.status(401).json({ message: "Foydalanuvchi tasdiqlangan emas" });
-        // }
-
-
         if (!user || user.role !== 'professor' || user.user_is_verified !== true) {
             console.log('prof bolish kk')
             res.status(403).json({"message":"Dars yaratish uchun professorni talab qilinadi yoki user tasdiqlanishi yani verify bo'lishini."});
@@ -64,7 +58,7 @@ const scheduleLecture = async (req, res) => {
 const listLecture = async (req, res) => {
     try {
         const lectures = await req.db.lectures.findAll({
-            include: req.db.users
+            include: req.db.users,
         });
         res.json(lectures);
     } catch (error) {
@@ -72,5 +66,20 @@ const listLecture = async (req, res) => {
     }
 };
 
+const getLectureById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const lecture = await req.db.lectures.findByPk(id, {
+            include: req.db.users
+        });
+        if (!lecture) {
+            return res.status(404).json({ error: 'Lecture topilmadi' });
+        }
+        res.json(lecture);
+    } catch (error) {
+        res.status(500).json({ error: 'Serverda xatolik yuz berdi' });
+    }
+};
 
-module.exports = {scheduleLecture,listLecture};
+
+module.exports = {scheduleLecture,listLecture,getLectureById};
