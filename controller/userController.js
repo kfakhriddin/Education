@@ -15,7 +15,7 @@ module.exports = class UserController {
             });
 
             await sendEmail(
-                `Please click to link: http://localhost/v1/users/verify/${user.dataValues.id}`,
+                `Please click to link: http://3.122.136.169:8000/v1/users/verify/${user.dataValues.id}`,
                 data.email
             );
 
