@@ -21,7 +21,7 @@ async function postgres() {
 
         await relations(db);
 
-        await sequelize.sync({ force:true });
+        await sequelize.sync({ force:false });
 
         return db;
     } catch (error) {
